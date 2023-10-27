@@ -1,4 +1,4 @@
-package com.example.interviewbe;
+package com.ltp.sensors;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
