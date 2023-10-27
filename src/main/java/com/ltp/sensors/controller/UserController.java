@@ -1,6 +1,7 @@
 package com.ltp.sensors.controller;
 
 import com.ltp.sensors.model.dto.JwtResponse;
+import com.ltp.sensors.model.dto.RoleResponse;
 import com.ltp.sensors.model.dto.UserLoginRequest;
 import com.ltp.sensors.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/user")
-@CrossOrigin(origins = "*", methods = {RequestMethod.POST, RequestMethod.OPTIONS})
+@CrossOrigin(origins = "*", methods = {RequestMethod.POST, RequestMethod.GET, RequestMethod.OPTIONS})
 @RequiredArgsConstructor
 public class UserController {
 
@@ -22,6 +23,11 @@ public class UserController {
     public ResponseEntity<JwtResponse> authenticate(@RequestBody UserLoginRequest userLoginRequest) {
         final Optional<JwtResponse> result = userService.authenticate(userLoginRequest);
         return ResponseEntity.status(result.isPresent() ? 200 : 404).body(result.orElse(null));
+    }
+
+    @GetMapping(value = "/roles")
+    public ResponseEntity<RoleResponse> getRole() {
+        return ResponseEntity.ok(userService.getRole());
     }
 
 }
