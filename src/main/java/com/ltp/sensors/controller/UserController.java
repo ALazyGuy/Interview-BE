@@ -25,7 +25,7 @@ public class UserController {
         return ResponseEntity.status(result.isPresent() ? 200 : 404).body(result.orElse(null));
     }
 
-    @GetMapping(value = "/roles")
+    @GetMapping(value = "/role", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<RoleResponse> getRole() {
         return ResponseEntity.ok(userService.getRole());
     }
