@@ -1,6 +1,6 @@
 package com.ltp.sensors.model.entity;
 
 public enum Role {
-    ADMINISTRATOR,
-    VIEWER
+    ROLE_ADMINISTRATOR,
+    ROLE_VIEWER
 }
