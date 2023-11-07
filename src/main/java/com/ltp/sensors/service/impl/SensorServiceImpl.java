@@ -30,17 +30,6 @@ public class SensorServiceImpl implements SensorService {
     private final SensorTypeRepository sensorTypeRepository;
 
     @Override
-    public SensorsResponse findSensors(final int page) {
-        final Pageable pageable = PageRequest.of(page, 4);
-        final Page<SensorEntity> all = sensorRepository.findAll(pageable);
-        final List<SensorDto> sensorDtos = all.getContent().stream()
-                .map(sensorMapper::toSensorDto)
-                .collect(Collectors.toList());
-        final SensorsResponse sensorsResponse = new SensorsResponse(sensorDtos, all.getTotalElements());
-        return sensorsResponse;
-    }
-
-    @Override
     public SensorsPopupDataResponse getPopupData() {
         final List<String> units = sensorMetricsRepository.findAll().stream()
                 .map(SensorMetricsEntity::getValue)
@@ -53,5 +42,16 @@ public class SensorServiceImpl implements SensorService {
                 .types(types)
                 .build();
         return response;
+    }
+
+    @Override
+    public SensorsResponse search(final String searchString, final int page) {
+        final Pageable pageable = PageRequest.of(page, 4);
+        final Page<SensorEntity> all = sensorRepository.findAll(searchString, pageable);
+        final List<SensorDto> sensorDtos = all.getContent().stream()
+                .map(sensorMapper::toSensorDto)
+                .collect(Collectors.toList());
+        final SensorsResponse sensorsResponse = new SensorsResponse(sensorDtos, all.getTotalElements());
+        return sensorsResponse;
     }
 }

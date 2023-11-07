@@ -17,19 +17,18 @@ public class SensorController {
 
     private final SensorService sensorService;
 
-    //TODO Add check if page number is in bounds
-    @GetMapping("/load")
-    public ResponseEntity<SensorsResponse> load(@RequestParam int page) {
-        final SensorsResponse response = sensorService.findSensors(page);
-        return ResponseEntity.status(response.sensors.isEmpty() ? 204 : 200).body(response);
-    }
-
     @GetMapping("/popup")
     public ResponseEntity<SensorsPopupDataResponse> getPopupData(HttpServletRequest request) {
         if(!request.isUserInRole("ADMINISTRATOR")) {
             return ResponseEntity.status(403).build();
         }
         return ResponseEntity.ok(sensorService.getPopupData());
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<SensorsResponse> search(@RequestParam String searchString, @RequestParam int page) {
+        final SensorsResponse response = sensorService.search(searchString, page);
+        return ResponseEntity.status(response.sensors.isEmpty() ? 204 : 200).body(response);
     }
 
 }

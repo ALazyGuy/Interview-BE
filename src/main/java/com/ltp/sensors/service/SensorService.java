@@ -8,6 +8,6 @@ import java.util.List;
 
 @Service
 public interface SensorService {
-    SensorsResponse findSensors(final int page);
     SensorsPopupDataResponse getPopupData();
+    SensorsResponse search(final String searchString, final int page);
 }
