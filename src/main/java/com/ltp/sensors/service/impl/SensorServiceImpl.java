@@ -54,4 +54,9 @@ public class SensorServiceImpl implements SensorService {
         final SensorsResponse sensorsResponse = new SensorsResponse(sensorDtos, all.getTotalElements());
         return sensorsResponse;
     }
+
+    @Override
+    public void deleteSensor(final long id) {
+        sensorRepository.deleteById(id);
+    }
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.OPTIONS})
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.DELETE, RequestMethod.OPTIONS})
 @RequestMapping("/api/sensor")
 @RequiredArgsConstructor
 public class SensorController {
@@ -29,6 +29,11 @@ public class SensorController {
     public ResponseEntity<SensorsResponse> search(@RequestParam String searchString, @RequestParam int page) {
         final SensorsResponse response = sensorService.search(searchString, page);
         return ResponseEntity.status(response.sensors.isEmpty() ? 204 : 200).body(response);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteSensorById(@PathVariable long id) {
+        sensorService.deleteSensor(id);
     }
 
 }

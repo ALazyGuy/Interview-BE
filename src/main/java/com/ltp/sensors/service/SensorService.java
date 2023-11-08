@@ -10,4 +10,5 @@ import java.util.List;
 public interface SensorService {
     SensorsPopupDataResponse getPopupData();
     SensorsResponse search(final String searchString, final int page);
+    void deleteSensor(final long id);
 }
