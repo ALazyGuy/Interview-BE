@@ -1,5 +1,5 @@
 insert into users(login, `password`, `role`)
-values ('admin', '$2y$10$VLQK20kqgMEaqZ40nvNqVea3OqvGTMvH4MKlkgVn/Nr/3JfAziSra', 0);
+values ('admin', '$2a$10$TTjkHUYZ7nyr1tgkAhzRbux/JI6h87HeYkkfntDrCzsne9iVURy8u', 0);
 insert into users(login, `password`, `role`)
 values ('user', '$2y$10$bXpV9RKwgAr4vBAQIg3qZ.W36bSm/yD5X2ganDiMi/VtX4NzK.uMG', 1);
 

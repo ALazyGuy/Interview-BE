@@ -19,7 +19,9 @@ public class SensorEntity {
     private Long id;
     private String name;
     private String model;
+    @Column(name = "`from`")
     private int from;
+    @Column(name = "`to`")
     private int to;
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "sensor_type_id", referencedColumnName = "id")

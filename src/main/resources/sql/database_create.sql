@@ -1,5 +1,11 @@
 create database if not exists sensors;
 
+create user if not exists sensors_user identified by 'password';
+grant all privileges on sensors.* to sensors_user;
+flush privileges;
+
+use sensors;
+
 create table if not exists `users`
 (
     id       bigint primary key auto_increment,
@@ -26,8 +32,8 @@ create table if not exists `sensors`(
     model varchar(15) not null ,
     `from` int,
     `to` int,
-    location varchar(40) not null,
-    description varchar(200) not null,
+    location varchar(40),
+    description varchar(200),
     sensor_type_id bigint not null,
     sensor_metric_id bigint not null,
     foreign key(sensor_metric_id) references sensor_metrics(id),

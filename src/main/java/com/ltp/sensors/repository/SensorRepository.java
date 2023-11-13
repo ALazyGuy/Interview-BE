@@ -9,11 +9,12 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SensorRepository extends JpaRepository<SensorEntity, Long> {
-    @Query("select s from SensorEntity s where s.name like %?1%" +
-                " or s.model like %?1%" +
-                " or s.location like %?1%" +
-                " or s.description like %?1%" +
-                " or s.type.name like %?1%" +
-                " or s.unit.value like %?1% order by s.name asc")
-    Page<SensorEntity> findAll(String searchString, Pageable pageable);
+    @Query("select s from SensorEntity s where s.name like %?1% escape '@'" +
+                " or s.model like %?1% escape '@'" +
+                " or s.location like %?1% escape '@'" +
+                " or s.description like %?1% escape '@'" +
+                " or s.type.name like %?1% escape '@'" +
+                " or s.unit.value like %?1% escape '@' order by s.name asc")
+    Page<SensorEntity> findAll(final String searchString, final Pageable pageable);
+    boolean existsByName(final String name);
 }
